@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: api-gateway
+  cloud.gateway:
+    discovery:
+      locator:
+        enabled: true
+    routes:
+      - id: customer-service
+        uri: lb://customer-service
+        predicates:
+          - Path=/web/api/v1/customers/**
+      - id: catalog-service
+        uri: lb://catalog-service
+        predicates:
+          - Path=/web/api/v1/catalogItems/**    
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  security:
+    user:
+      name: configUser
+      password: configPassword
+
+server:
+  port: 8073
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8070/eureka}
+
+management:
+   endpoint:
+      gateway:
+         enabled: true
+   endpoints:
+    web:
+      exposure:
+        include: gateway
+

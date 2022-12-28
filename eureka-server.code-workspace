@@ -1,0 +1,11 @@
+{
+    "folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.dependency.syncWithFolderExplorer": true,
+		"xml.downloadExternalResources.enabled": true
+	}
+}
